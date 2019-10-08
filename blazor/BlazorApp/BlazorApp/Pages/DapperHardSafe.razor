@@ -1,10 +1,10 @@
-﻿@page "/notsafe"
+﻿@page "/dapperhardsafe"
 
 @using BlazorApp.Data
 @using BlazorApp.Data.Database
 @inherits OwningComponentBase<ProductService>
 
-<h1>PRODUTOS A VENDA (NOT SAFE)</h1>
+<h1>PRODUTOS A VENDA (HARD SAFE)</h1>
 
 <input @bind="@searchTerm" style="width: 100%" />
 <br />
@@ -50,7 +50,7 @@
 
     async void PerformSearch()
     {
-        products = await @Service.GetNotSafeProductsAsync(searchTerm);
+        products = await @Service.HardSafeDapper(searchTerm);
         lastSearched = searchTerm;
     }
 }

@@ -1,0 +1,56 @@
+﻿@page "/efhardsafe"
+
+@using BlazorApp.Data
+@using BlazorApp.Data.Database
+@inherits OwningComponentBase<ProductService>
+
+<h1>PRODUTOS A VENDA (HARD SAFE)</h1>
+
+<input @bind="@searchTerm" style="width: 100%" />
+<br />
+<button class="btn btn-primary" @onclick="PerformSearch">Search</button>
+
+@if (products != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.ProductName</td>
+                    <td>@product.Price</td>
+                    <td>@product.InsertDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (lastSearched != null)
+    {
+        <p>Ultima pesquisa foi: @lastSearched</p>
+    }
+}
+
+@functions {
+    protected string searchTerm { get; set; }
+    protected string lastSearched { get; set; }
+}
+
+@code {
+    List<Products> products;
+    protected override async Task OnInitializedAsync()
+    {
+    }
+
+    async void PerformSearch()
+    {
+        products = await @Service.HardSafe_EntityFramework(searchTerm);
+        lastSearched = searchTerm;
+    }
+}

@@ -1,12 +1,12 @@
-﻿@page "/hardsafe"
+﻿@page "/efsafe"
 
 @using BlazorApp.Data
 @using BlazorApp.Data.Database
 @inherits OwningComponentBase<ProductService>
 
-<h1>PRODUTOS A VENDA (HARD SAFE)</h1>
+<h1>PRODUTOS A VENDA (EASY SAFE)</h1>
 
-<input @bind="@searchTerm" />
+<input @bind="@searchTerm" style="width: 100%" />
 <br />
 <button class="btn btn-primary" @onclick="PerformSearch">Search</button>
 
@@ -50,7 +50,7 @@
 
     async void PerformSearch()
     {
-        products = await @Service.GetHardSafeProductsAsync(searchTerm);
+        products = await @Service.SafeEntityFramework(searchTerm);
         lastSearched = searchTerm;
     }
 }
